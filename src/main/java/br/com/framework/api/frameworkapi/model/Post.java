@@ -1,25 +1,27 @@
 package br.com.framework.api.frameworkapi.model;
 
 import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Post {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String text;
-	private LocalDateTime date = LocalDateTime.now();
 	private String urlImagem;
+	private LocalDateTime date = LocalDateTime.now();
 
 	@ManyToOne
 	private StatusPost status;
@@ -83,6 +85,6 @@ public class Post {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
+	}	
 
 }

@@ -13,22 +13,22 @@ public class StatusPost {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Integer id;
 	private String statusPost;
 
 	public StatusPost() {
 	}
 
-	public StatusPost(Long id, String statusPost) {
+	public StatusPost(Integer id, String statusPost) {
 		this.id = id;
 		this.statusPost = statusPost;
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
