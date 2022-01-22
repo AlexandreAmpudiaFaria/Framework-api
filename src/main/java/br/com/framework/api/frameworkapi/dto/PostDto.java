@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import br.com.framework.api.frameworkapi.model.Post;
 import br.com.framework.api.frameworkapi.model.StatusPost;
 import br.com.framework.api.frameworkapi.model.User;
@@ -12,7 +14,9 @@ public class PostDto {
 
 	private Long id;
 	private String text;
-	private LocalDateTime date = LocalDateTime.now();
+	
+	@JsonFormat(pattern="dd/MM/yyyy HH:mm:ss")
+	private LocalDateTime date;
 	private String urlImagem;
 	private StatusPost status;
 	private User user;
