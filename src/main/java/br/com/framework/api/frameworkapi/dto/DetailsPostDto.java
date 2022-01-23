@@ -27,7 +27,6 @@ public class DetailsPostDto {
 		this.id = post.getId();
 		this.text = post.getText();
 		this.date = post.getDate();
-		this.urlImagem = post.getUrlImagem();
 		this.status = post.getStatus();
 		this.user = post.getUser();
 		this.comments = new ArrayList<>();
