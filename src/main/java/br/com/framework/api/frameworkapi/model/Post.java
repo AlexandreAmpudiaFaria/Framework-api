@@ -31,10 +31,10 @@ public class Post {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
 	private User user;
-	
+
 	@OneToMany(mappedBy = "post")
 	private List<Image> images = new ArrayList<>();
-	
+
 	@OneToMany(mappedBy = "post")
 	private List<Comment> comments = new ArrayList<>();
 
@@ -92,8 +92,14 @@ public class Post {
 
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
-	}	
-	
-	
+	}
+
+	public List<Image> getImages() {
+		return images;
+	}
+
+	public void setImages(List<Image> images) {
+		this.images = images;
+	}
 
 }
