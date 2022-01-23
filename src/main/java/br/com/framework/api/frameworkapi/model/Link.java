@@ -20,6 +20,11 @@ public class Link {
 
 	public Link() {
 	}
+	
+	public Link(String url, Post post) {
+		this.url = url;
+		this.post = post;
+	}
 
 	public Link(Link link) {
 		this.post = link.getPost();
