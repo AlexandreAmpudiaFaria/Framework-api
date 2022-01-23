@@ -38,6 +38,9 @@ public class Post {
 
 	@OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
 	private List<Comment> comments = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
+	private List<Link> links = new ArrayList<>();
 
 	public Post() {
 	}
