@@ -26,11 +26,6 @@ public class Link {
 		this.post = post;
 	}
 
-	public Link(Link link) {
-		this.post = link.getPost();
-		this.url = link.getUrl();
-	}
-
 	public Long getId() {
 		return id;
 	}

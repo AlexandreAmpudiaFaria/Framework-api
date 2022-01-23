@@ -38,7 +38,7 @@ public class Post {
 
 	@OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
 	private List<Comment> comments = new ArrayList<>();
-	
+
 	@OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
 	private List<Link> links = new ArrayList<>();
 
@@ -104,6 +104,14 @@ public class Post {
 
 	public void setImages(List<Image> images) {
 		this.images = images;
+	}
+
+	public List<Link> getLinks() {
+		return links;
+	}
+
+	public void setLinks(List<Link> links) {
+		this.links = links;
 	}
 
 }
