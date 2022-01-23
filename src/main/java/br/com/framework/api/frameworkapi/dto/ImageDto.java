@@ -8,7 +8,7 @@ import br.com.framework.api.frameworkapi.model.Image;
 public class ImageDto {
 
 	private Long id;
-	private String urlImage;
+	private String url;
 
 	public ImageDto() {
 
@@ -16,7 +16,7 @@ public class ImageDto {
 
 	public ImageDto(Image images) {
 		this.id = images.getId();
-		this.urlImage = images.getUrlImage();
+		this.url = images.getUrl();
 	}
 
 	public Long getId() {
@@ -27,12 +27,12 @@ public class ImageDto {
 		this.id = id;
 	}
 
-	public String getUrlImage() {
-		return urlImage;
+	public String getUrl() {
+		return url;
 	}
 
-	public void setUrlImage(String urlImage) {
-		this.urlImage = urlImage;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	public static List<ImageDto> convert(List<Image> images) {

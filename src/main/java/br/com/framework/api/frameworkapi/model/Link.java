@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Image {
+public class Link {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,13 +18,12 @@ public class Image {
 	@ManyToOne
 	private Post post;
 
-	public Image() {
-
+	public Link() {
 	}
 
-	public Image(String url, Post post) {
-		this.url = url;
-		this.post = post;
+	public Link(Link link) {
+		this.post = link.getPost();
+		this.url = link.getUrl();
 	}
 
 	public Long getId() {
