@@ -14,10 +14,9 @@ public class PostDto {
 
 	private Long id;
 	private String text;
-	
-	@JsonFormat(pattern="dd/MM/yyyy HH:mm:ss")
+
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	private LocalDateTime date;
-	private String urlImagem;
 	private StatusPost status;
 	private User user;
 
@@ -28,7 +27,6 @@ public class PostDto {
 		this.id = post.getId();
 		this.text = post.getText();
 		this.date = post.getDate();
-		this.urlImagem = post.getUrlImagem();
 		this.status = post.getStatus();
 		this.user = post.getUser();
 	}
@@ -55,14 +53,6 @@ public class PostDto {
 
 	public void setDate(LocalDateTime date) {
 		this.date = date;
-	}
-
-	public String getUrlImagem() {
-		return urlImagem;
-	}
-
-	public void setUrlImagem(String urlImagem) {
-		this.urlImagem = urlImagem;
 	}
 
 	public StatusPost getStatus() {

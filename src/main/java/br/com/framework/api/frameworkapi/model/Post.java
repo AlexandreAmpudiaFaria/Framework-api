@@ -23,7 +23,6 @@ public class Post {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String text;
-	private String urlImagem;
 	private LocalDateTime date = LocalDateTime.now();
 
 	@ManyToOne
@@ -34,14 +33,16 @@ public class Post {
 	private User user;
 	
 	@OneToMany(mappedBy = "post")
+	private List<Image> images = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "post")
 	private List<Comment> comments = new ArrayList<>();
 
 	public Post() {
 	}
 
-	public Post(String text, String urlImagem, StatusPost status) {
+	public Post(String text, StatusPost status) {
 		this.text = text;
-		this.urlImagem = urlImagem;
 		this.status = status;
 	}
 
@@ -67,14 +68,6 @@ public class Post {
 
 	public void setDate(LocalDateTime date) {
 		this.date = date;
-	}
-
-	public String getUrlImagem() {
-		return urlImagem;
-	}
-
-	public void setUrlImagem(String urlImagem) {
-		this.urlImagem = urlImagem;
 	}
 
 	public StatusPost getStatus() {

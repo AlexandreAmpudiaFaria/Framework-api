@@ -11,7 +11,6 @@ import br.com.framework.api.frameworkapi.repository.StatusRepository;
 public class PostForm {
 
 	private String text;
-	private String urlImagem;
 	private Integer status;
 
 	public String getText() {
@@ -20,14 +19,6 @@ public class PostForm {
 
 	public void setText(String text) {
 		this.text = text;
-	}
-
-	public String getUrlImagem() {
-		return urlImagem;
-	}
-
-	public void setUrlImagem(String urlImagem) {
-		this.urlImagem = urlImagem;
 	}
 
 	public Integer getStatus() {
@@ -40,7 +31,7 @@ public class PostForm {
 
 	public Post convert(PostRepository postRepository, StatusRepository statusRepository) {
 		StatusPost statusPost = statusRepository.getById(status);
-		return new Post(text, urlImagem, statusPost);
+		return new Post(text, statusPost);
 	}
 
 }
