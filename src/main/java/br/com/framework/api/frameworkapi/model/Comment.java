@@ -3,15 +3,12 @@ package br.com.framework.api.frameworkapi.model;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -26,8 +23,11 @@ public class Comment extends Status implements Serializable {
 	private String comment;
 	private LocalDateTime date = LocalDateTime.now();
 
-	@OneToOne(cascade = CascadeType.ALL)
+	/*@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "post_id", referencedColumnName = "id")
+	private Post post;*/
+	
+	@ManyToOne
 	private Post post;
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -40,6 +40,7 @@ public class Comment extends Status implements Serializable {
 
 	public Comment(String comment, Post post) {
 		this.comment = comment;
+		this.post = post;
 	}
 
 	public Long getId() {
@@ -81,5 +82,7 @@ public class Comment extends Status implements Serializable {
 	public void setPost(Post post) {
 		this.post = post;
 	}
+	
+	
 
 }

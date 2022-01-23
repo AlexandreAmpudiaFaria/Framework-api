@@ -35,19 +35,14 @@ public class CommentController {
 
 	@Autowired
 	PostRepository postRepository;
-
-	@GetMapping
-	@RequestMapping(value = "/{post}/{id}")
-	public List<CommentDto> getCommentsByPost(@PathVariable("id") Long id) {
-		List<Comment> comments = commentRepository.findByPost(id);
-		return CommentDto.convert(comments);
-	}
 	
 	@GetMapping
 	public List<CommentDto> getAllComments() {
 		List<Comment> comments = commentRepository.findAll();
 		return CommentDto.convert(comments);
 	}
+	
+	
 	
 	@PostMapping
 	public ResponseEntity<CommentDto> createComment(@RequestBody @Valid CommentsPostForm values, UriComponentsBuilder uriBuilder) {

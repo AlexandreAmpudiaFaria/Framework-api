@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.framework.api.frameworkapi.model.Comment;
-import br.com.framework.api.frameworkapi.model.Post;
 import br.com.framework.api.frameworkapi.model.User;
 
 public class CommentDto {
@@ -13,7 +12,7 @@ public class CommentDto {
 	private Long id;
 	private String comment;
 	private LocalDateTime date = LocalDateTime.now();
-	private Post post;
+	//private Post post;
 	private User user;
 
 	public CommentDto() {
@@ -24,7 +23,7 @@ public class CommentDto {
 		this.id = comment.getId();
 		this.comment = comment.getComment();
 		this.date = comment.getDate();
-		this.post = comment.getPost();
+		//this.post = comment.getPost();
 		this.user = comment.getUser();
 	}
 
@@ -52,13 +51,13 @@ public class CommentDto {
 		this.date = date;
 	}
 
-	public Post getPost() {
+	/*public Post getPost() {
 		return post;
 	}
 
 	public void setPost(Post post) {
 		this.post = post;
-	}
+	}*/
 
 	public User getUser() {
 		return user;
