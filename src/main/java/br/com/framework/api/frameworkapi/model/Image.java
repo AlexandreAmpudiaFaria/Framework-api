@@ -17,6 +17,9 @@ public class Image {
 
 	@ManyToOne
 	private Post post;
+	
+	@ManyToOne
+	private PhotoAlbum photoAlbum;
 
 	public Image() {
 
