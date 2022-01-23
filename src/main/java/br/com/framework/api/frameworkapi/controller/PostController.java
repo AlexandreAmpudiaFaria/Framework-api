@@ -43,7 +43,6 @@ public class PostController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<DetailsPostDto> detailer(@PathVariable Long id) {
-		System.out.println(id);
 		Optional<Post> post = postRepository.findById(id);
 		if (post.isPresent()) {
 			return ResponseEntity.ok(new DetailsPostDto(post.get()));

@@ -33,7 +33,7 @@ public class Post {
 	@JsonIgnore
 	private User user;
 	
-	@OneToMany(mappedBy = "comment")
+	@OneToMany(mappedBy = "post")
 	private List<Comment> comments = new ArrayList<>();
 
 	public Post() {

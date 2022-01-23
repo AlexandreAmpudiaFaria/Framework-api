@@ -26,6 +26,9 @@ public class Comment extends Status implements Serializable {
 	/*@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "post_id", referencedColumnName = "id")
 	private Post post;*/
+	
+	@ManyToOne
+	private Post post;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
@@ -37,6 +40,7 @@ public class Comment extends Status implements Serializable {
 
 	public Comment(String comment, Post post) {
 		this.comment = comment;
+		this.post = post;
 	}
 
 	public Long getId() {
@@ -70,5 +74,15 @@ public class Comment extends Status implements Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	public Post getPost() {
+		return post;
+	}
+
+	public void setPost(Post post) {
+		this.post = post;
+	}
+	
+	
 
 }
