@@ -12,7 +12,6 @@ public class CommentDto {
 	private Long id;
 	private String comment;
 	private LocalDateTime date = LocalDateTime.now();
-	//private Post post;
 	private User user;
 
 	public CommentDto() {
@@ -23,7 +22,6 @@ public class CommentDto {
 		this.id = comment.getId();
 		this.comment = comment.getComment();
 		this.date = comment.getDate();
-		//this.post = comment.getPost();
 		this.user = comment.getUser();
 	}
 
@@ -50,14 +48,6 @@ public class CommentDto {
 	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
-
-	/*public Post getPost() {
-		return post;
-	}
-
-	public void setPost(Post post) {
-		this.post = post;
-	}*/
 
 	public User getUser() {
 		return user;

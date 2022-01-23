@@ -18,10 +18,10 @@ public class DetailsPostDto {
 
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	private LocalDateTime date;
-	private String urlImagem;
 	private StatusPost status;
 	private User user;
 	private List<CommentDto> comments;
+	private List<ImageDto> images;
 
 	public DetailsPostDto(Post post) {
 		this.id = post.getId();
@@ -31,6 +31,8 @@ public class DetailsPostDto {
 		this.user = post.getUser();
 		this.comments = new ArrayList<>();
 		this.comments.addAll(post.getComments().stream().map(CommentDto::new).collect(Collectors.toList()));
+		this.images = new ArrayList<>();
+		this.images.addAll(post.getImages().stream().map(ImageDto::new).collect(Collectors.toList()));
 	}
 
 	public Long getId() {
@@ -45,10 +47,6 @@ public class DetailsPostDto {
 		return date;
 	}
 
-	public String getUrlImagem() {
-		return urlImagem;
-	}
-
 	public StatusPost getStatus() {
 		return status;
 	}
@@ -59,6 +57,10 @@ public class DetailsPostDto {
 
 	public List<CommentDto> getComments() {
 		return comments;
+	}
+
+	public List<ImageDto> getImages() {
+		return images;
 	}
 
 }
