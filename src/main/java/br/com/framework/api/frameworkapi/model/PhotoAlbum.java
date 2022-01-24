@@ -28,8 +28,8 @@ public class PhotoAlbum extends Status {
 	@JsonIgnore
 	private User user;
 
-	/*@OneToMany(mappedBy = "photoAlbum", cascade = CascadeType.REMOVE)
-	private List<Image> images = new ArrayList<>();*/
+	@OneToMany(mappedBy = "photoAlbum", cascade = CascadeType.REMOVE)
+	private List<Image> images = new ArrayList<>();
 
 	public PhotoAlbum() {
 

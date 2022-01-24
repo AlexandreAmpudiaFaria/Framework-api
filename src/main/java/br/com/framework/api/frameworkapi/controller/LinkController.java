@@ -1,32 +1,15 @@
 package br.com.framework.api.frameworkapi.controller;
 
-import java.net.URI;
-import java.util.List;
-
-import javax.validation.Valid;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
-
-import br.com.framework.api.frameworkapi.dto.LinkDto;
-import br.com.framework.api.frameworkapi.form.LinkForm;
-import br.com.framework.api.frameworkapi.model.Link;
-import br.com.framework.api.frameworkapi.repository.LinkRepository;
-import br.com.framework.api.frameworkapi.repository.PostRepository;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RequestMapping("/links")
 public class LinkController {
 
-	@Autowired
+	/*@Autowired
 	LinkRepository linkRepository;
 
 	@Autowired
@@ -45,6 +28,6 @@ public class LinkController {
 
 		URI uri = uriBuilder.path("/links/{id}").buildAndExpand(links.getId()).toUri();
 		return ResponseEntity.created(uri).body(new LinkDto(links));
-	}
+	}*/
 
 }
