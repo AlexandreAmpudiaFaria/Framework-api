@@ -17,9 +17,9 @@ public class Image {
 
 	@ManyToOne
 	private Post post;
-	
-	@ManyToOne
-	private PhotoAlbum photoAlbum;
+
+	/*@ManyToOne
+	private PhotoAlbum photoAlbum;*/
 
 	public Image() {
 
@@ -28,6 +28,10 @@ public class Image {
 	public Image(String url, Post post) {
 		this.url = url;
 		this.post = post;
+	}
+
+	public Image(String url) {
+		this.url = url;
 	}
 
 	public Long getId() {
