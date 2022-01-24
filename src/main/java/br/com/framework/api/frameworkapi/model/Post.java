@@ -25,6 +25,8 @@ public class Post {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	private String name;
+
 	@Column(columnDefinition = "TEXT")
 	private String text;
 	private LocalDateTime date = LocalDateTime.now();
@@ -48,9 +50,10 @@ public class Post {
 	public Post() {
 	}
 
-	public Post(String text, StatusPost status) {
+	public Post(String text, StatusPost status, String name) {
 		this.text = text;
 		this.status = status;
+		this.name = name;
 	}
 
 	public Long getId() {
@@ -59,6 +62,14 @@ public class Post {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getText() {

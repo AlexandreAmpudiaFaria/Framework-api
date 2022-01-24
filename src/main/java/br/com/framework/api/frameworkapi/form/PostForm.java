@@ -18,6 +18,7 @@ import br.com.framework.api.frameworkapi.repository.StatusRepository;
 public class PostForm {
 
 	private String text;
+	private String name;
 	private Integer status;
 	private List<Image> images = new ArrayList<>();
 	private List<Link> links = new ArrayList<>();
@@ -28,6 +29,22 @@ public class PostForm {
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public List<Image> getImages() {
+		return images;
+	}
+
+	public void setImages(List<Image> images) {
+		this.images = images;
 	}
 
 	public Integer getStatus() {
@@ -57,7 +74,7 @@ public class PostForm {
 	public Post convert(PostRepository postRepository, StatusRepository statusRepository,
 			ImageRepository imageRepository) {
 		StatusPost statusPost = statusRepository.getById(status);
-		return new Post(text, statusPost);
+		return new Post(text, statusPost, name);
 	}
 
 	public void newImage(ImageRepository imageRepository, Post post) {

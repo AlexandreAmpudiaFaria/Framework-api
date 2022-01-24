@@ -7,4 +7,5 @@ import br.com.framework.api.frameworkapi.model.StatusPost;
 public interface StatusRepository extends JpaRepository<StatusPost, Integer>{
 
 
+
 }
