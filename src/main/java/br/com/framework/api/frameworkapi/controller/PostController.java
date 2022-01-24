@@ -23,6 +23,8 @@ import br.com.framework.api.frameworkapi.dto.DetailsPostDto;
 import br.com.framework.api.frameworkapi.dto.PostDto;
 import br.com.framework.api.frameworkapi.form.PostForm;
 import br.com.framework.api.frameworkapi.model.Post;
+import br.com.framework.api.frameworkapi.repository.ImageRepository;
+import br.com.framework.api.frameworkapi.repository.LinkRepository;
 import br.com.framework.api.frameworkapi.repository.PostRepository;
 import br.com.framework.api.frameworkapi.repository.StatusRepository;
 
@@ -36,6 +38,12 @@ public class PostController {
 
 	@Autowired
 	StatusRepository statusRepository;
+
+	@Autowired
+	ImageRepository imageRepository;
+
+	@Autowired
+	LinkRepository linkRepository;
 
 	@GetMapping
 	public List<PostDto> getPosts() {
@@ -55,12 +63,28 @@ public class PostController {
 
 	@PostMapping
 	public ResponseEntity<PostDto> createPost(@RequestBody @Valid PostForm dados, UriComponentsBuilder uriBuilder) {
-		Post post = dados.convert(postRepository, statusRepository);
+		Post post = dados.convert(postRepository, statusRepository, imageRepository);
 		postRepository.save(post);
 
 		URI uri = uriBuilder.path("/post/{id}").buildAndExpand(post.getId()).toUri();
+
+		// this method encapsulates the implementation do insert new image
+		dados.newImage(imageRepository, post);
+
+		// this method encapsulates the implementation do insert new link
+		dados.newLink(linkRepository, post);
+
 		return ResponseEntity.created(uri).body(new PostDto(post));
 	}
+
+	/*
+	 * @PostMapping public ResponseEntity<PostDto> createPost(@RequestBody @Valid
+	 * PostForm dados, UriComponentsBuilder uriBuilder) { Post post =
+	 * dados.convert(postRepository, statusRepository); postRepository.save(post);
+	 * 
+	 * URI uri = uriBuilder.path("/post/{id}").buildAndExpand(post.getId()).toUri();
+	 * return ResponseEntity.created(uri).body(new PostDto(post)); }
+	 */
 
 	@DeleteMapping("/{id}")
 	@Transactional
