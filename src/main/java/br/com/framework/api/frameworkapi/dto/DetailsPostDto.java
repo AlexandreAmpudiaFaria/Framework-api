@@ -15,6 +15,7 @@ public class DetailsPostDto {
 
 	private Long id;
 	private String text;
+	private String name;
 
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	private LocalDateTime date;
@@ -27,6 +28,7 @@ public class DetailsPostDto {
 	public DetailsPostDto(Post post) {
 		this.id = post.getId();
 		this.text = post.getText();
+		this.name = post.getName();
 		this.date = post.getDate();
 		this.status = post.getStatus();
 		this.user = post.getUser();
@@ -44,6 +46,10 @@ public class DetailsPostDto {
 
 	public String getText() {
 		return text;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	public LocalDateTime getDate() {

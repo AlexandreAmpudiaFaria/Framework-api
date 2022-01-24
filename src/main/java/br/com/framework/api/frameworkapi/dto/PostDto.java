@@ -14,6 +14,7 @@ public class PostDto {
 
 	private Long id;
 	private String text;
+	private String name;
 
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	private LocalDateTime date;
@@ -29,6 +30,7 @@ public class PostDto {
 		this.date = post.getDate();
 		this.status = post.getStatus();
 		this.user = post.getUser();
+		this.name = post.getName();
 	}
 
 	public Long getId() {
@@ -69,6 +71,14 @@ public class PostDto {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public static List<PostDto> converter(List<Post> posts) {
