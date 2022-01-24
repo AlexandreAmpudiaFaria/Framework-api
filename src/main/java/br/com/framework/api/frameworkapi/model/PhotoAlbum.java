@@ -21,6 +21,9 @@ public class PhotoAlbum extends Status {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	private String name;
+
 	private String description;
 	private LocalDateTime dateCreate = LocalDateTime.now();
 
@@ -28,17 +31,17 @@ public class PhotoAlbum extends Status {
 	@JsonIgnore
 	private User user;
 
-	@OneToMany(mappedBy = "photoAlbum", cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "photoAlbum", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
 	private List<Image> images = new ArrayList<>();
 
 	public PhotoAlbum() {
 
 	}
 
-	public PhotoAlbum(String description, User user, List<Image> images) {
+	public PhotoAlbum(String name, String description, User user) {
+		this.name = name;
 		this.description = description;
 		this.user = user;
-		this.images = images;
 	}
 
 	public Long getId() {
@@ -47,6 +50,14 @@ public class PhotoAlbum extends Status {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getDescription() {
