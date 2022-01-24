@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -25,6 +26,8 @@ public class PhotoAlbum extends Status {
 	private String name;
 
 	private String description;
+	
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	private LocalDateTime dateCreate = LocalDateTime.now();
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -38,10 +41,9 @@ public class PhotoAlbum extends Status {
 
 	}
 
-	public PhotoAlbum(String name, String description, User user) {
+	public PhotoAlbum(String name, String description) {
 		this.name = name;
 		this.description = description;
-		this.user = user;
 	}
 
 	public Long getId() {
