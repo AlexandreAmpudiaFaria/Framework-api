@@ -67,7 +67,7 @@ public class PostForm {
 			System.out.println("to passando aqui no segundo metodo");
 			result.setUrl(image.getUrl());
 			result.setPost(post);
-			;
+			result.setPhotoAlbum(null);
 			imageRepository.save(result);
 		}
 	}
