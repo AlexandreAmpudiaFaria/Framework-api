@@ -11,7 +11,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -25,9 +24,8 @@ public class Post {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@Column(columnDefinition="TEXT")
-	@Lob
+
+	@Column(columnDefinition = "TEXT")
 	private String text;
 	private LocalDateTime date = LocalDateTime.now();
 
@@ -38,13 +36,13 @@ public class Post {
 	@JsonIgnore
 	private User user;
 
-	@OneToMany(mappedBy = "post", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
+	@OneToMany(mappedBy = "post", cascade = { CascadeType.REMOVE, CascadeType.PERSIST })
 	private List<Image> images = new ArrayList<>();
 
 	@OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
 	private List<Comment> comments = new ArrayList<>();
 
-	@OneToMany(mappedBy = "post", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
+	@OneToMany(mappedBy = "post", cascade = { CascadeType.REMOVE, CascadeType.PERSIST })
 	private List<Link> links = new ArrayList<>();
 
 	public Post() {

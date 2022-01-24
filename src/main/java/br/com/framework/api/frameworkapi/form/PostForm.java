@@ -56,7 +56,6 @@ public class PostForm {
 
 	public Post convert(PostRepository postRepository, StatusRepository statusRepository,
 			ImageRepository imageRepository) {
-
 		StatusPost statusPost = statusRepository.getById(status);
 		return new Post(text, statusPost);
 	}
