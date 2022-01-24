@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -21,24 +22,28 @@ public class PhotoAlbum extends Status {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	private String name;
+
 	private String description;
+	
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	private LocalDateTime dateCreate = LocalDateTime.now();
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
 	private User user;
 
-	@OneToMany(mappedBy = "photoAlbum", cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "photoAlbum", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
 	private List<Image> images = new ArrayList<>();
 
 	public PhotoAlbum() {
 
 	}
 
-	public PhotoAlbum(String description, User user, List<Image> images) {
+	public PhotoAlbum(String name, String description) {
+		this.name = name;
 		this.description = description;
-		this.user = user;
-		this.images = images;
 	}
 
 	public Long getId() {
@@ -47,6 +52,14 @@ public class PhotoAlbum extends Status {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getDescription() {
