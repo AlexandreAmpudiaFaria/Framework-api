@@ -7,7 +7,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,7 +14,6 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -37,10 +35,6 @@ public class Post {
 
 	@ManyToOne
 	private StatusPost status;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JsonIgnore
-	private User user;
 
 	@OneToMany(mappedBy = "post", cascade = { CascadeType.REMOVE, CascadeType.PERSIST })
 	private List<Image> images = new ArrayList<>();
@@ -98,14 +92,6 @@ public class Post {
 
 	public void setStatus(StatusPost status) {
 		this.status = status;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 
 	public List<Comment> getComments() {
