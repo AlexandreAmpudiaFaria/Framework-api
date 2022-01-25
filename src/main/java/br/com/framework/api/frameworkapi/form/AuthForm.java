@@ -1,5 +1,7 @@
 package br.com.framework.api.frameworkapi.form;
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+
 public class AuthForm {
 
 	private String username;
@@ -19,6 +21,10 @@ public class AuthForm {
 
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
+	}
+
+	public UsernamePasswordAuthenticationToken convert() {
+		return new UsernamePasswordAuthenticationToken(username, pwd);
 	}
 
 }
