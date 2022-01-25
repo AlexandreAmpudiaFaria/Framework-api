@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.framework.api.frameworkapi.model.Post;
 import br.com.framework.api.frameworkapi.model.StatusPost;
-import br.com.framework.api.frameworkapi.model.User;
 
 public class PostDto {
 
@@ -19,7 +18,6 @@ public class PostDto {
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	private LocalDateTime date;
 	private StatusPost status;
-	private User user;
 
 	public PostDto() {
 	}
@@ -29,7 +27,6 @@ public class PostDto {
 		this.text = post.getText();
 		this.date = post.getDate();
 		this.status = post.getStatus();
-		this.user = post.getUser();
 		this.name = post.getName();
 	}
 
@@ -63,14 +60,6 @@ public class PostDto {
 
 	public void setStatus(StatusPost status) {
 		this.status = status;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 
 	public String getName() {

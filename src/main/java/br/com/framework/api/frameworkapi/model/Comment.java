@@ -4,13 +4,10 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Comment extends Status implements Serializable {
@@ -29,10 +26,6 @@ public class Comment extends Status implements Serializable {
 	
 	@ManyToOne
 	private Post post;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JsonIgnore
-	private User user;
 
 	public Comment() {
 
@@ -65,14 +58,6 @@ public class Comment extends Status implements Serializable {
 
 	public void setDate(LocalDateTime date) {
 		this.date = date;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 
 	public Post getPost() {
