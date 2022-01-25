@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.framework.api.frameworkapi.dto.TokenDto;
 import br.com.framework.api.frameworkapi.form.AuthForm;
 import br.com.framework.api.frameworkapi.security.TokenService;
 
@@ -28,14 +29,13 @@ public class AuthController {
 	private TokenService tokenService;
 	
 	@PostMapping
-	public ResponseEntity<?> authetic(@RequestBody @Valid AuthForm form){
+	public ResponseEntity<TokenDto> authetic(@RequestBody @Valid AuthForm form){
 		UsernamePasswordAuthenticationToken data = form.convert();
 		
 		try {
 			Authentication authentication = authManager.authenticate(data);
 			String token = tokenService.generateToken(authentication);
-			System.out.println("peguei o token: " + token);
-			return ResponseEntity.ok().build();
+			return ResponseEntity.ok(new TokenDto(token, "Bearer"));
 		} catch (org.springframework.security.core.AuthenticationException e) {
 			return ResponseEntity.badRequest().build();
 		}
