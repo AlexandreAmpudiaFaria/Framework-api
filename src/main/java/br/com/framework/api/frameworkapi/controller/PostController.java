@@ -52,13 +52,13 @@ public class PostController {
 	LinkRepository linkRepository;
 
 	@GetMapping
-	public List<PostDto> getPosts() {
+	public List<PostDto> getAllPosts() {
 		List<Post> posts = postRepository.findAll();
 		return PostDto.converter(posts);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<DetailsPostDto> detailer(@PathVariable Long id) {
+	public ResponseEntity<DetailsPostDto> detailerPosts(@PathVariable Long id) {
 		Optional<Post> post = postRepository.findById(id);
 		if (post.isPresent()) {
 			return ResponseEntity.ok(new DetailsPostDto(post.get()));
@@ -90,7 +90,7 @@ public class PostController {
 
 	@DeleteMapping("/{id}")
 	@Transactional
-	public ResponseEntity<?> remove(@PathVariable Long id) {
+	public ResponseEntity<?> removePost(@PathVariable Long id) {
 		Optional<Post> optional = postRepository.findById(id);
 
 		if (optional.isPresent()) {

@@ -65,7 +65,7 @@ public class CommentController {
 
 	@DeleteMapping("/{id}")
 	@Transactional
-	public ResponseEntity<?> remove(@PathVariable Long id) {
+	public ResponseEntity<?> removeComment(@PathVariable Long id) {
 		Optional<Comment> optional = commentRepository.findById(id);
 
 		System.out.println("id do comment: " + id);
@@ -92,12 +92,5 @@ public class CommentController {
 		}
 		return ResponseEntity.notFound().build();
 	}
-
-	/*
-	 * @GetMapping public List<CommentDto> getComments(@RequestBody CommentsPostForm
-	 * values) { Long result = values.toConvert(commentRepository);
-	 * System.out.println(result); List<Comment> comments =
-	 * commentRepository.findByPost(result); return CommentDto.convert(comments); }
-	 */
 
 }
