@@ -76,9 +76,13 @@ public class CommentController {
 			String username = SecurityContextHolder.getContext().getAuthentication().getName();
 			Optional<User> user = userRepository.findByUsername(username);
 			Long currentUser = user.get().getId();
+			
+			System.out.println("usuario atual: " + currentUser);
 
 			// Checking the owner of the comment
-			Long owner = commentRepository.findByUser();
+			Long owner = commentRepository.findByUser(id);
+			
+			System.out.println("usuario do comment: " + owner);
 
 			if (currentUser == owner) {
 				commentRepository.deleteById(id);

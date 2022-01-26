@@ -58,5 +58,10 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 	public void configure(WebSecurity web) throws Exception {
 
 	}
+	
+	/*public static void main(String[] args) {
+		String senha = new BCryptPasswordEncoder().encode("12345");
+		System.out.println(senha);
+	}*/
 
 }

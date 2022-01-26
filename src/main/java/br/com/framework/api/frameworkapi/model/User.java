@@ -45,8 +45,13 @@ public class User implements UserDetails {
 	@OneToMany(mappedBy = "user", cascade = { CascadeType.REMOVE, CascadeType.ALL }, fetch = FetchType.LAZY)
 	private List<PhotoAlbum> albuns;
 
-	public Long getId() {
-		return id;
+	public User (String username, String pwd) {
+		this.username = username;
+		this.pwd = pwd;
+	}
+	
+	public User () {
+		
 	}
 
 	@Override
@@ -72,6 +77,10 @@ public class User implements UserDetails {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+	
+	public Long getId() {
+		return id;
 	}
 
 	public void setId(Long id) {

@@ -31,15 +31,17 @@ public class AuthController {
 	@PostMapping
 	public ResponseEntity<TokenDto> authetic(@RequestBody @Valid AuthForm form){
 		UsernamePasswordAuthenticationToken data = form.convert();
-		
+
 		try {
 			Authentication authentication = authManager.authenticate(data);
 			String token = tokenService.generateToken(authentication);
 			return ResponseEntity.ok(new TokenDto(token, "Bearer"));
 		} catch (org.springframework.security.core.AuthenticationException e) {
+			e.printStackTrace();
+			System.out.println("dando ruim aqui");
 			return ResponseEntity.badRequest().build();
 		}
-		
+
 	}
 
 }
