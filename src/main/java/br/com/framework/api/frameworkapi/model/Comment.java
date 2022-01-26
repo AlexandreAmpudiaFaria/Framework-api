@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,10 +21,9 @@ public class Comment extends Status implements Serializable {
 	private String comment;
 	private LocalDateTime date = LocalDateTime.now();
 
-	/*@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "post_id", referencedColumnName = "id")
-	private Post post;*/
-	
+	@ManyToOne(fetch = FetchType.LAZY)
+	private User user;
+
 	@ManyToOne
 	private Post post;
 
@@ -67,7 +67,13 @@ public class Comment extends Status implements Serializable {
 	public void setPost(Post post) {
 		this.post = post;
 	}
-	
-	
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 }

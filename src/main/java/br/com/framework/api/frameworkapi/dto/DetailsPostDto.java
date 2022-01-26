@@ -22,6 +22,7 @@ public class DetailsPostDto {
 	private List<CommentDto> comments;
 	private List<ImageDto> images;
 	private List<LinkDto> links;
+	private Long user;
 
 	public DetailsPostDto(Post post) {
 		this.id = post.getId();
@@ -35,6 +36,8 @@ public class DetailsPostDto {
 		this.images.addAll(post.getImages().stream().map(ImageDto::new).collect(Collectors.toList()));
 		this.links = new ArrayList<>();
 		this.links.addAll(post.getLinks().stream().map(LinkDto::new).collect(Collectors.toList()));
+		this.user = post.getUser().getId();
+
 	}
 
 	public Long getId() {
@@ -67,6 +70,10 @@ public class DetailsPostDto {
 
 	public List<LinkDto> getLinks() {
 		return links;
+	}
+
+	public Long getUser() {
+		return user;
 	}
 
 }

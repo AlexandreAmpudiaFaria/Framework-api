@@ -9,6 +9,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,10 +24,12 @@ import br.com.framework.api.frameworkapi.dto.DetailsPostDto;
 import br.com.framework.api.frameworkapi.dto.PostDto;
 import br.com.framework.api.frameworkapi.form.PostForm;
 import br.com.framework.api.frameworkapi.model.Post;
+import br.com.framework.api.frameworkapi.model.User;
 import br.com.framework.api.frameworkapi.repository.ImageRepository;
 import br.com.framework.api.frameworkapi.repository.LinkRepository;
 import br.com.framework.api.frameworkapi.repository.PostRepository;
 import br.com.framework.api.frameworkapi.repository.StatusRepository;
+import br.com.framework.api.frameworkapi.repository.UserRepository;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
@@ -38,6 +41,9 @@ public class PostController {
 
 	@Autowired
 	StatusRepository statusRepository;
+	
+	@Autowired
+	UserRepository userRepository;
 
 	@Autowired
 	ImageRepository imageRepository;
@@ -63,7 +69,12 @@ public class PostController {
 
 	@PostMapping
 	public ResponseEntity<PostDto> createPost(@RequestBody @Valid PostForm dados, UriComponentsBuilder uriBuilder) {
-		Post post = dados.convert(postRepository, statusRepository, imageRepository);
+		Post post = dados.convert(postRepository, statusRepository, imageRepository);		
+		
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		Optional<User> user = userRepository.findByUsername(username);
+		post.setUser(user.get());
+		
 		postRepository.save(post);
 
 		URI uri = uriBuilder.path("/post/{id}").buildAndExpand(post.getId()).toUri();

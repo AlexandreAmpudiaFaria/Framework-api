@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -19,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-@Table(name="users")
+@Table(name = "users")
 public class User implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
@@ -34,10 +36,14 @@ public class User implements UserDetails {
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Profile> profiles = new ArrayList<>();
 
-	/*
-	 * @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch =
-	 * FetchType.LAZY) private List<Post> posts;
-	 */
+	@OneToMany(mappedBy = "user", cascade = { CascadeType.REMOVE, CascadeType.ALL }, fetch = FetchType.LAZY)
+	private List<Post> posts;
+
+	@OneToMany(mappedBy = "user", cascade = { CascadeType.REMOVE, CascadeType.ALL }, fetch = FetchType.LAZY)
+	private List<Comment> comments;
+
+	@OneToMany(mappedBy = "user", cascade = { CascadeType.REMOVE, CascadeType.ALL }, fetch = FetchType.LAZY)
+	private List<PhotoAlbum> albuns;
 
 	public Long getId() {
 		return id;
@@ -88,11 +94,29 @@ public class User implements UserDetails {
 		this.pwd = pwd;
 	}
 
-	/*
-	 * public List<Post> getPosts() { return posts; }
-	 * 
-	 * public void setPosts(List<Post> posts) { this.posts = posts; }
-	 */
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
+	public List<PhotoAlbum> getAlbuns() {
+		return albuns;
+	}
+
+	public void setAlbuns(List<PhotoAlbum> albuns) {
+		this.albuns = albuns;
+	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

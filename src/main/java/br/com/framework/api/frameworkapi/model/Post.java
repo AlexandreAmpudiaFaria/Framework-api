@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,12 +30,14 @@ public class Post {
 	@Column(columnDefinition = "TEXT")
 	@Lob
 	private String text;
-	
-	
+
 	private LocalDateTime date = LocalDateTime.now();
 
 	@ManyToOne
 	private StatusPost status;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	private User user;
 
 	@OneToMany(mappedBy = "post", cascade = { CascadeType.REMOVE, CascadeType.PERSIST })
 	private List<Image> images = new ArrayList<>();
@@ -116,6 +119,14 @@ public class Post {
 
 	public void setLinks(List<Link> links) {
 		this.links = links;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }
