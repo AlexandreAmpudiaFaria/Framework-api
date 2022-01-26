@@ -41,7 +41,7 @@ public class PostController {
 
 	@Autowired
 	StatusRepository statusRepository;
-	
+
 	@Autowired
 	UserRepository userRepository;
 
@@ -69,12 +69,12 @@ public class PostController {
 
 	@PostMapping
 	public ResponseEntity<PostDto> createPost(@RequestBody @Valid PostForm dados, UriComponentsBuilder uriBuilder) {
-		Post post = dados.convert(postRepository, statusRepository, imageRepository);		
-		
+		Post post = dados.convert(postRepository, statusRepository, imageRepository);
+
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		Optional<User> user = userRepository.findByUsername(username);
 		post.setUser(user.get());
-		
+
 		postRepository.save(post);
 
 		URI uri = uriBuilder.path("/post/{id}").buildAndExpand(post.getId()).toUri();
@@ -88,24 +88,29 @@ public class PostController {
 		return ResponseEntity.created(uri).body(new PostDto(post));
 	}
 
-	/*
-	 * @PostMapping public ResponseEntity<PostDto> createPost(@RequestBody @Valid
-	 * PostForm dados, UriComponentsBuilder uriBuilder) { Post post =
-	 * dados.convert(postRepository, statusRepository); postRepository.save(post);
-	 * 
-	 * URI uri = uriBuilder.path("/post/{id}").buildAndExpand(post.getId()).toUri();
-	 * return ResponseEntity.created(uri).body(new PostDto(post)); }
-	 */
-
 	@DeleteMapping("/{id}")
 	@Transactional
-	public ResponseEntity<?> removePost(@PathVariable Long id) {
+	public ResponseEntity<?> remove(@PathVariable Long id) {
 		Optional<Post> optional = postRepository.findById(id);
-		if (optional.isPresent()) {
-			postRepository.deleteById(id);
-			return ResponseEntity.ok().build();
-		}
 
+		if (optional.isPresent()) {
+
+			// get the current user
+			String username = SecurityContextHolder.getContext().getAuthentication().getName();
+			Optional<User> user = userRepository.findByUsername(username);
+			Long currentUser = user.get().getId();
+
+			// Checking the owner of the post
+			Long owner = postRepository.findByUser(id);
+
+			System.out.println("usuario do comment: " + owner);
+
+			if (currentUser == owner) {
+				postRepository.deleteById(id);
+				return ResponseEntity.ok().build();
+			}
+
+		}
 		return ResponseEntity.notFound().build();
 	}
 
