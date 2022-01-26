@@ -18,6 +18,7 @@ public class PostDto {
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	private LocalDateTime date;
 	private StatusPost status;
+	private Long user;
 
 	public PostDto() {
 	}
@@ -28,6 +29,7 @@ public class PostDto {
 		this.date = post.getDate();
 		this.status = post.getStatus();
 		this.name = post.getName();
+		this.user = post.getUser().getId();
 	}
 
 	public Long getId() {
@@ -72,6 +74,10 @@ public class PostDto {
 
 	public static List<PostDto> converter(List<Post> posts) {
 		return posts.stream().map(PostDto::new).collect(Collectors.toList());
+	}
+	
+	public Long getUser() {
+		return user;
 	}
 
 }
