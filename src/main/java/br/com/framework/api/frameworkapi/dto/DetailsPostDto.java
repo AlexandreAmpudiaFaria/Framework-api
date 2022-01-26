@@ -76,4 +76,10 @@ public class DetailsPostDto {
 		return user;
 	}
 
+	public void setUser(Long user) {
+		this.user = user;
+	}
+
+	
+
 }

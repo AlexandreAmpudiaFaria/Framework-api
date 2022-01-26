@@ -8,17 +8,16 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.framework.api.frameworkapi.model.PhotoAlbum;
-import br.com.framework.api.frameworkapi.model.User;
 
 public class PhotoAlbumDto {
 
 	private Long id;
 	private String name;
 	private String description;
-	
+
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	private LocalDateTime dateCreate;
-	private User user;
+	private Long user;
 
 	private List<ImageDto> images = new ArrayList<>();
 
@@ -33,6 +32,7 @@ public class PhotoAlbumDto {
 		this.dateCreate = photoAlbum.getDateCreate();
 		this.images = new ArrayList<>();
 		this.images.addAll(photoAlbum.getImages().stream().map(ImageDto::new).collect(Collectors.toList()));
+		this.user = photoAlbum.getUser().getId();
 	}
 
 	public Long getId() {
@@ -51,7 +51,7 @@ public class PhotoAlbumDto {
 		return dateCreate;
 	}
 
-	public User getUser() {
+	public Long getUser() {
 		return user;
 	}
 
